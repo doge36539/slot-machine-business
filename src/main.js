@@ -90,21 +90,21 @@ function chooseOutcome() {
     return { type: 'jackpot', stops: [2, 2, 2] } // 1%
   }
   
-  if (roll < 0.20) {
+  if (roll < 0.21) {
     // #region agent log
     fetch('http://127.0.0.1:7821/ingest/b27507fc-d476-4071-b428-c2c8b22fa287',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'91ebaa'},body:JSON.stringify({sessionId:'91ebaa',runId:'post-fix',hypothesisId:'H2',location:'src/main.js:chooseOutcome',message:'Outcome selected',data:{roll,outcomeType:'sugar',stops:[1,1,1]},timestamp:Date.now()})}).catch(()=>{});
     // #endregion
-    return { type: 'sugar', stops: [1, 1, 1] } // 19%
+    return { type: 'sugar', stops: [1, 1, 1] } // 20%
   }
   
-  if (roll < 0.35) {
+  if (roll < 0.30) {
     // #region agent log
     fetch('http://127.0.0.1:7821/ingest/b27507fc-d476-4071-b428-c2c8b22fa287',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'91ebaa'},body:JSON.stringify({sessionId:'91ebaa',runId:'post-fix',hypothesisId:'H2',location:'src/main.js:chooseOutcome',message:'Outcome selected',data:{roll,outcomeType:'cookie',stops:[0,0,0]},timestamp:Date.now()})}).catch(()=>{});
     // #endregion
-    return { type: 'cookie', stops: [0, 0, 0] } // 15%
+    return { type: 'cookie', stops: [0, 0, 0] } // 9%
   }
 
-  // 65% loss: guarantee not triple.
+  // 70% loss: guarantee not triple.
   let a = randomSymbolIndex()
   let b = randomSymbolIndex()
   let c = randomSymbolIndex()
@@ -113,11 +113,9 @@ function chooseOutcome() {
     b = randomSymbolIndex()
     c = randomSymbolIndex()
   }
-  
   // #region agent log
   fetch('http://127.0.0.1:7821/ingest/b27507fc-d476-4071-b428-c2c8b22fa287',{method:'POST',headers:{'Content-Type':'application/json','X-Debug-Session-Id':'91ebaa'},body:JSON.stringify({sessionId:'91ebaa',runId:'post-fix',hypothesisId:'H2',location:'src/main.js:chooseOutcome',message:'Outcome selected',data:{roll,outcomeType:'loss',stops:[a,b,c]},timestamp:Date.now()})}).catch(()=>{});
   // #endregion
-  
   return { type: 'loss', stops: [a, b, c] }
 }
 
