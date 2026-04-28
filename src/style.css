@@ -12,22 +12,22 @@ body,
 
 body {
   font-family: Arial, Helvetica, sans-serif;
-  background: radial-gradient(circle at 30% 20%, #9e0f35, #4f0b27 58%, #1a0613);
+  /* FIXED: Changed from purple/maroon to a dark casino green */
+  background: radial-gradient(circle at 30% 20%, #1d7a3a, #0f4a22 58%, #07210e);
   color: #fff4d8;
-  overflow: auto; /* Changed to auto to allow scrolling if screen is small */
-  display: grid;  /* Added to center the fixed-size machine safely */
-  place-items: center;
+  overflow: hidden; /* FIXED: Restored to prevent scrolling */
 }
 
 .machine {
-  /* FIXED: Replaced 100vw and 100vh */
-  width: 1260px;
-  height: 850px;
+  /* FIXED: Restored 100vw/100vh to fill the screen and remove the purple gap */
+  width: 100vw;
+  height: 100vh;
   padding: 16px 22px 14px 28px;
   display: grid;
   grid-template-rows: 1fr auto;
   gap: 10px;
-  background: linear-gradient(180deg, #841e2c 0%, #4e1220 100%);
+  /* FIXED: Changed from red to deep green */
+  background: linear-gradient(180deg, #184f2a 0%, #0e341b 100%);
   box-shadow:
     inset 0 0 0 4px rgba(255, 227, 153, 0.32),
     inset 0 0 0 14px rgba(122, 67, 22, 0.75);
@@ -49,19 +49,14 @@ body {
   padding: 18px;
   border-radius: 24px;
   border: 5px solid #dab15a;
-  background: linear-gradient(180deg, #2f1024, #150816);
   min-height: 0;
-  
-  /* FIXED: Replaced 'min(80vh, 780px)' and 'min(calc(100vw - 250px), 1260px)' */
-  height: 600px;
-  width: 1000px;
-  
+  height: min(80vh, 780px);
   position: relative;
-  background:
-    linear-gradient(180deg, #1d7a3a, #0f4a22),
-    linear-gradient(180deg, #2f1024, #150816);
+  /* FIXED: Cleaned up the double background to a solid green gradient */
+  background: linear-gradient(180deg, #1d7a3a, #0f4a22);
   margin: 0;
   justify-self: center;
+  width: min(calc(100vw - 250px), 1260px);
 }
 
 .reels-frame::before {
@@ -125,10 +120,7 @@ body {
 
 .lever-wrap {
   width: 160px;
-  
-  /* FIXED: Replaced 'min(78vh, 740px)' */
-  height: 600px;
-  
+  height: min(78vh, 740px);
   position: relative;
   display: grid;
   align-items: center;
@@ -138,7 +130,9 @@ body {
 
 .lever-base {
   position: absolute;
-  bottom: 130px;
+  /* FIXED: Anchored to the center instead of the bottom so it never detaches from the rod */
+  top: 50%;
+  margin-top: 144px;
   width: 150px;
   height: 96px;
   border-radius: 20px;
